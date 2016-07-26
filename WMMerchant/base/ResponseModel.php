@@ -70,26 +70,28 @@ class ResponseModel {
             die;
         }
         $resp = new self;
-        if (isset($response['errorCode'])) {
-            $resp->errorCode = $response['errorCode'];
+        
+        if (isset($response['ErrorCode'])) {
+            $resp->errorCode = $response['ErrorCode'];
+            
         } else {
             var_dump($response_text);
             die;
         }
-        if (isset($response['message'])) {
-            $resp->message = $response['message'];
+        if (isset($response['Message'])) {
+            $resp->message = $response['Message'];
         }
         if (isset($response['uiMessage'])) {
             $resp->ui_message = $response['uiMessage'];
         }
 
         if (!$resp->isError()) {
-            if (!empty($response['object'])) {
+            if (!empty($response['Object'])) {
 
                 if (empty($model)) {
                     throw new \Exception("Model object must be set for loading data and validation");
                 }
-                $model->setAttributes($response['object']);
+                $model->setAttributes($response['Object']);
                 $resp->object = $model;
             }
         }
