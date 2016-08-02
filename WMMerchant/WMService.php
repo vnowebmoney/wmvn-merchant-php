@@ -13,8 +13,8 @@ use WMMerchant\models\ViewOrderResponse;
  */
 class WMService {
 
-    const WMMERCHANT_HOST = 'https://betaapimerchant.webmoney.com.vn';
-    const WMMERCHANT_HOST_TEST = 'https://betaapimerchant.webmoney.com.vn';
+    const WMMERCHANT_HOST = 'https://apimerchant.webmoney.com.vn';
+    const WMMERCHANT_HOST_TEST = 'https://apimerchant.webmoney.com.vn';
 
     
 
@@ -167,9 +167,11 @@ class WMService {
      * @return string         REST URL
      */
     public function createURL($action) {
+		var mode = 'payment'
         $host = $this->is_local_test ? self::WMMERCHANT_HOST_TEST : self::WMMERCHANT_HOST;
+		if ($this->is_local_test) mode = "sandbox";
         
-        return $host . '/' . $action;
+        return $host .'/'. mode. '/' . $action;
     }
     /**
      * Parse transaction redirect result URL
