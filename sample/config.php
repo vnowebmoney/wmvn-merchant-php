@@ -6,7 +6,7 @@ function globalConfig() {
     return array(
         'wm_merchant' => array(
             'passcode' => 'M_HASH',
-            'secret_key' => 'test@webmoney',
+            'secret_key' => 'test',
             'merchant_code' => 'WMTEST',
             'production_mode' => false, // true if in production mode
         ),

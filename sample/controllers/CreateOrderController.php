@@ -33,9 +33,11 @@ class CreateOrderController extends Controller {
     }
 
     protected function post($result) {
+        // 2 lines below uses for debuging
+        // ini_set('display_errors', 'On');
+        // error_reporting(E_ALL);
         $model = new CreateOrderRequest();
         $model->setAttributes($_POST);
-
         $service = new WMService($this->config['wm_merchant']);
         $resp = $service->createOrder($model);
 
