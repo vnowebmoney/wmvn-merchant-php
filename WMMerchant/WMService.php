@@ -16,7 +16,7 @@ class WMService {
     const WMMERCHANT_HOST = 'https://apimerchant.webmoney.com.vn';
     const WMMERCHANT_HOST_TEST = 'https://apimerchant.webmoney.com.vn';
 
-    
+
 
     const SUCCESS_STATUS = 'WM_SUCCESS';
     const FAILED_STATUS = 'WM_FAILED';
@@ -167,11 +167,11 @@ class WMService {
      * @return string         REST URL
      */
     public function createURL($action) {
-		var mode = 'payment'
-        $host = $this->is_local_test ? self::WMMERCHANT_HOST_TEST : self::WMMERCHANT_HOST;
-		if ($this->is_local_test) mode = "sandbox";
-        
-        return $host .'/'. mode. '/' . $action;
+        if ($this->is_local_test) {
+            return self::WMMERCHANT_HOST_TEST . "/sandbox/" . $action;
+        } else {
+            return self::WMMERCHANT_HOST . "/payment/" . $action;
+        }
     }
     /**
      * Parse transaction redirect result URL
@@ -243,7 +243,7 @@ class WMService {
         $request->hashChecksum($this);
         $json_data = json_encode($request);
         $resp = $curl->setOption(CURLOPT_POSTFIELDS, $json_data)->post($url, true);
-        
+
         $response = ResponseModel::load($resp, new CreateOrderResponse);
 
         return $response;
